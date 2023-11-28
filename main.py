@@ -52,9 +52,10 @@ def pq_connect(field1, field2, field3):
     conn.close()
     return True
 
+
 @tracer.start_as_current_span("main")
 def main():
-    st.title("Testing streamlit")
+    st.title("Hi ShaHar, Testing streamlit")
 
     # Get user input
     field1 = st.text_input("Field 1")
