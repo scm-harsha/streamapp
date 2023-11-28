@@ -5,14 +5,14 @@ import logging
 
 logging.basicConfig(
     format="%(asctime)s %(levelname)-8s %(message)s",
-    level=logging.DEBUG,
+    level=logging.INFO,
     datefmt="%Y-%m-%d %H:%M:%S",
 )
 
 logger = logging.getLogger(__file__)
 
 
-create_tracer("stream-scientist")
+tracer = create_tracer("stream-scientist")
 
 @tracer.start_as_current_span("pg_connect")
 def pq_connect(field1, field2, field3):
