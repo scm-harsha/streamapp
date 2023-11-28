@@ -1,7 +1,20 @@
 import streamlit as st
 import psycopg2
+from lstelemetry import create_tracer
+import logging
+
+logging.basicConfig(
+    format="%(asctime)s %(levelname)-8s %(message)s",
+    level=logging.DEBUG,
+    datefmt="%Y-%m-%d %H:%M:%S",
+)
+
+logger = logging.getLogger(__file__)
 
 
+create_tracer("stream-scientist")
+
+@tracer.start_as_current_span("pg_connect")
 def pq_connect(field1, field2, field3):
     # Connect to the PostgreSQL database
     conn = psycopg2.connect(
@@ -39,7 +52,7 @@ def pq_connect(field1, field2, field3):
     conn.close()
     return True
 
-
+@tracer.start_as_current_span("main")
 def main():
     st.title("Testing streamlit")
 
