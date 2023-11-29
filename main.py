@@ -14,6 +14,7 @@ logger = logging.getLogger(__file__)
 
 tracer = create_tracer("stream-scientist")
 
+
 @tracer.start_as_current_span("pg_connect")
 def pq_connect(field1, field2, field3):
     # Connect to the PostgreSQL database
@@ -62,6 +63,7 @@ def main():
     field2 = st.text_input("Field 2")
     field3 = st.text_input("Field 3")
     if st.button("print fields"):
+        logger.info("print fields")
         st.write(field1, field2, field3)
 
 
